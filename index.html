@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="km">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tax Invoice - Cheang Long Co., Ltd</title>
+  <style>
+    @media print { @page { size: A4; margin: 20mm } }
+    :root{ --page-width:800px; }
+    body{ font-family: "Khmer OS Battambang", "Noto Sans", Arial, sans-serif; margin:0; padding:20px; display:flex; justify-content:center; background:#f6f6f6 }
+    .sheet{ width:var(--page-width); background:#fff; padding:28px 34px; box-shadow:0 2px 6px rgba(0,0,0,0.06); color:#000 }
+
+    /* Header */
+    .header{ text-align:center; margin-bottom:6px }
+    .company-name{ font-size:22px; font-weight:700; letter-spacing:1px }
+    .company-sub{ font-size:12px; margin-top:6px }
+    .address{ font-size:12px; margin-top:3px }
+    hr.sep{ border:none; border-top:1px solid #222; margin:12px 0 }
+
+    /* Title */
+    .title{ text-align:center; font-weight:700; margin:8px 0 18px; font-size:16px }
+
+    /* Customer + Invoice meta */
+    .meta{ display:flex; justify-content:space-between; gap:10px }
+    .customer{ width:58% }
+    .meta-row{ font-size:13px; margin-bottom:8px }
+    .meta .label{ font-weight:600 }
+
+    .invoice-box{ width:40%; text-align:right; font-size:13px }
+    .invoice-box .line{ margin-bottom:8px }
+
+    /* Items table */
+    table.items{ width:100%; border-collapse:collapse; margin-top:6px }
+    table.items thead th{ border:1px solid #222; padding:8px; font-weight:700; font-size:13px; text-align:left }
+    table.items tbody td{ border:1px solid #222; padding:12px }{ border-left:1px solid #222; border-right:1px solid #222; padding:12px }
+    /* removed redundant rules */{ border-left:1px solid #222 }
+    table.items tbody tr td:last-child{ border-right:1px solid #222 }
+    table.items thead th.center, table.items tbody td.center{ text-align:center }
+
+    /* Totals box on right */
+    .totals{ width:300px; float:right; margin-top:8px; border:1px solid #222 }
+    .totals .row{ display:flex; justify-content:space-between; padding:8px 10px; border-top:1px solid rgba(0,0,0,0.06); font-size:13px }
+    .totals .row:first-child{ border-top:none }
+    .totals .label{ font-weight:600 }
+
+    /* Signature */
+    .signs{ display:flex; justify-content:space-between; margin-top:80px }
+    .sign{ width:45%; text-align:center }
+    .sign .line{ border-top:1px solid #222; margin-top:36px; padding-top:6px }
+    .sign small{ display:block; margin-top:6px; font-size:12px }
+
+    /* Footer spacing */
+    .clearfix::after{ content:""; display:block; clear:both }
+
+    /* Small helpers */
+    .muted{ color:#444; font-size:12px }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="header">
+      <div class="company-name">ក្រុមហ៊ុន ឈាងឡុង</div>
+      <div class="company-name">CHEANG LONG CO., Ltd.</div>
+      <div class="company-sub">លេខ​សម្គាល់ពន្ធ​ផ្ទាល់ខ្លួន (VATTIN) : K007-100140769</div>
+      <div class="address">Address: No. 1076 EF, St371, Group4 Phum Trea 2 Sangkat Steung Meanchey1, Khan Mean Chey, Phnom Penh City</div>
+    </div>
+
+    <hr class="sep">
+
+    <div class="title">វិក័យប័ត្រពន្ធ<br><span style="font-size:12px; font-weight:400">TAX INVOICE</span></div>
+
+    <div class="meta">
+      <div class="customer">
+        <div class="meta-row"><span class="label">ឈ្មោះក្រុមហ៊ុន ឬ អតិថិជន:</span><br><strong>Company Name / Customer:</strong></div>
+        <div class="meta-row"><span class="label">អាសយដ្ឋាន:</span><br>Address#</div>
+        <div class="meta-row"><span class="label">លេខសម្គាល់ពន្ធ (VATTIN) :</span><br>VATTIN#</div>
+      </div>
+
+      <div class="invoice-box">
+        <div class="line"><strong>លេខវិក័យប័ត្រ / Invoice No:</strong><br>TI25-00121</div>
+        <div class="line"><strong>កាលបរិច្ឆេទ / Date:</strong><br>31-Oct-2025</div>
+        <div class="line"><strong>អ្នកចេញវិក័យប័ត្រ:</strong><br>Prepared by:</div>
+      </div>
+    </div>
+
+    <!-- Items table -->
+    <table class="items" aria-label="Items">
+      <thead>
+        <tr>
+          <th style="width:6%">ល.រ<br>No</th>
+          <th style="width:58%">ពិពណ៌នា​ទំនិញ<br>Item Description</th>
+          <th style="width:8%" class="center">បរិមាណ<br>Qty</th>
+          <th style="width:8%" class="center">ឯកតា<br>U/M</th>
+          <th style="width:10%" class="center">តំលៃ​ឯកតា<br>Unit P.</th>
+          <th style="width:10%" class="center">ចំនួនទឹកប្រាក់<br>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Empty rows to visually match template - adjust number to fit page -->
+        <tr>
+          <td class="center">{{no}}</td>
+          <td style="min-height:120px">{{description}}</td>
+          <td class="center">{{qty}}</td>
+          <td class="center">{{unit}}</td>
+          <td class="center">{{rate}}</td>
+          <td class="center">{{amount}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="clearfix">
+      <div class="totals" role="note" aria-label="Totals">
+        <div class="row"><div class="label">សរុប Subtotal:</div><div>{{subtotal}}</div></div>
+        <div class="row"><div class="label">VAT 10%:</div><div>{{vat_10%}}</div></div>
+        <div class="row"><div class="label">សរុបរូម Grand Total:</div><div>{{grand_total}}</div></div>
+        <div class="row"><div class="label">អត្រាប្តូរប្រាក់ Exchange Rate:</div><div>{{exchange_rate}}</div></div>
+        <div class="row"><div class="label">សរុបជាប្រាក់រៀល:</div><div>{{grand_total_kh}}</div></div>
+      </div>
+    </div>
+
+    <div class="signs">
+      <div class="sign">
+        <div class="line"></div>
+        <small>ហត្ថលេខា និងឈ្មោះអតិថិជន<br>Customer's Signature & Name</small>
+      </div>
+
+      <div class="sign">
+        <div class="line"></div>
+        <small>ហត្ថលេខា និងឈ្មោះអ្នកលក់<br>Seller's Signature & Name</small>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
